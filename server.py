@@ -136,5 +136,16 @@ def getMonthlySummary(startDt:Optional[str], endDt:Optional[str]) :
         "categoryBreakdown": categoryData
     }
 
+@mcp.tool()
+def deleteExpense(expenseId) -> str :
+    """ Delete expense record by its id """
+    result = expenses_collection.delete_one({"_id": expenseId})
+
+    if result.deleted_count == 0 :
+        return "No expense found"
+
+    return "Expense Deleted"
+
+
 if __name__ == "__main__":
     mcp.run()
